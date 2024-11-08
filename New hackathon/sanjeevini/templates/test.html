@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sanjeevini</title>
+
+    <style>
+        body {
+            background-color: #282a35;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column; /* Stack header and container vertically */
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Style for header */
+        header {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            color: #ffffff;
+        }
+
+        .container {
+            display: flex;
+            background-color: #333744;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .left, .right {
+            width: 50%;
+            padding: 20px;
+        }
+
+        .left {
+            background-color: #3b3f52;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .leftinside {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #a9a9a9;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            flex-direction: column;
+        }
+
+        .right {
+            background-color: #444860;
+        }
+
+        .rightinside {
+            background-color: #5a5f77;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .rightinside h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #ffffff;
+        }
+
+        .choice {
+            margin-bottom: 20px;
+        }
+
+        .choice span {
+            color: #d3d3d3;
+            margin-left: 5px;
+            margin-right: 15px;
+        }
+
+        .logincard {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .logincard label {
+            color: #d3d3d3;
+        }
+
+        .logincard input[type="email"],
+        .logincard input[type="password"],
+        .logincard input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #888;
+            border-radius: 5px;
+            background-color: #333;
+            color: #ffffff;
+        }
+
+        .logincard input[type="checkbox"] {
+            margin-top: 10px;
+        }
+
+        .logincard input[type="submit"] {
+            background-color: #6c5ce7;
+            border: none;
+            color: #ffffff;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .logincard input[type="submit"]:hover {
+            background-color: #4c3fcf;
+        }
+
+        #signup {
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        #signup a {
+            color: #6c5ce7;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        #signup a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Sanjeevini</h1>
+    </header>
+
+    <div class="container">
+        <div class="left">
+            <div class="leftinside">
+              <p style="font-size: xx-large;">Welcome back  💚</p>
+                <div>
+                   <i style="font-size: large; color: white" id="qoutes"> </i>
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <div class="rightinside">
+                <h2>Login :)</h2>
+                <form action="/loging" method="post">
+                    <div class="choice">
+                        <input type="radio" name="user_type" value="doctor" onclick="signUpVisibility(false)" required>
+                        <span>Doctor</span>
+                        <input type="radio" name="user_type" value="patient" onclick="signUpVisibility(true)" required>
+                        <span>Patient</span>
+                    </div>
+
+                    <div class="logincard">
+                        <div>
+                             {% with messages = get_flashed_messages() %}
+                                {% if messages %}
+                                    {% for message in messages %}
+                                        <p style="color: red">{{ message }}</p>
+                                    {% endfor %}
+                                {% endif %}
+                            {% endwith %}
+                        </div>
+
+                        <label for="email">Email: </label>
+                        <input type="email" id="email" name="email" required>
+
+                        <label for="password">Password: </label>
+                        <input type="password" id="password" name="password" required>
+
+                        <div>
+                            <input type="checkbox" onclick="showPassword()"> Show Password
+                        </div>
+                        <input type="submit" value="Login">
+
+                        <div id="signup" style="display:none">
+                            <p>Don't have an account? <a href="">Sign Up</a></p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let quotes = ["Your Shortcut to Avoiding Dr. Google!", "One Click to Skip the Long Clinic Lines!", "Keeping ‘Health’ in ‘Helpline’!", "ಬಾಲನಿಂದ ಮುದುಕನವರಗೆ, ಸಕಲ ಸಮಸ್ಯೆಗೆ ಸಂಜೀವಿನಿ!"];
+            let quotes_length = quotes.length;
+            let i = 0;
+
+            setInterval(function() {
+                document.getElementById("qoutes").innerText = quotes[i];
+                i = (i + 1) % quotes_length;
+            }, 3000);
+        });
+
+        function signUpVisibility(value) {
+            document.getElementById("signup").style.display = value ? "block" : "none";
+        }
+
+        function showPassword() {
+            const passwordField = document.getElementById("password");
+            passwordField.type = passwordField.type === "password" ? "text" : "password";
+        }
+    </script>
+</body>
+</html>

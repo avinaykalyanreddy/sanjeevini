@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sanjeevini</title>
+    <style>
+        body {
+            margin: 0;
+            background: linear-gradient(135deg, #282a35, #3b3e52);
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #ffffff;
+        }
+        .navbar {
+            background-color: #282a35;
+            padding: 15px;
+            color: #ffffff;
+            text-align: left;
+            font-size: 24px;
+            font-weight: bold;
+            width: 100%;
+        }
+        .card-container {
+            display: flex;
+            width: 100%;
+            height: 100%;
+        }
+        .card {
+            flex: 1;
+            margin: 10px;
+            padding: 20px;
+            background-color: #3b3e52;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            font-size: 18px;
+        }
+        .card h2 {
+            margin-top: 0;
+            color: #ffdd57;
+        }
+        .card p {
+            color: #d1d1e0;
+            font-weight: bold;
+        }
+        .qualification-table {
+            margin-top: 10px;
+            color: #ffffff;
+            width: 100%;
+            text-align: left;
+        }
+        .qualification-table td {
+            padding: 5px;
+            color: #d1d1e0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        Sanjeevini
+    </div>
+
+    <!-- Card Container -->
+    <div class="card-container">
+        <!-- Card 1 -->
+        <div class="card">
+            <h2>Doctor</h2>
+            Dr. {{ doc_data["name"] }}
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card">
+            <p>Qualifications</p>
+            <table class="qualification-table">
+                {% for i in doc_data["qualification"] %}
+                <tr>
+                    <td>{{ i }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>
